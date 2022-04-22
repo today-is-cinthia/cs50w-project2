@@ -14,10 +14,14 @@ socketio = SocketIO(app)
 def index():
     return render_template("index.html")
 
+@app.route("/home")
+def home():
+    return render_template("home.html") 
+
 @socketio.on('message')
 def handle_message(data):
     print('received message:' + data)
-    send('data', broadcast = True)
+    send(data, broadcast = True)
 
 
 if __name__ == '__main__':

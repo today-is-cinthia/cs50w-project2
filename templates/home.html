@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block title %}
+CFLACK
+{% endblock %}
+{% block main %}
+<script src="/static/script.js"></script>
+<input id="mensaje" type="text" aria-label="manda un mensaje">
+<button onclick="setname()" id="enviar" type="submit">send</button>
+<h2 id="saludo"></h2>
+<ul id="lista"></ul>
+{% endblock %}
