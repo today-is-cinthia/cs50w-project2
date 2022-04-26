@@ -9,6 +9,7 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 socketio = SocketIO(app)
 
+nombres = []
 
 @app.route("/")
 def index():
@@ -22,6 +23,9 @@ def home():
 def handle_message(data):
     print('received message:' + data)
     send(data, broadcast = True)
+
+@socketio.on('name')
+def save_name(name):
 
 
 if __name__ == '__main__':

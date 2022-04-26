@@ -4,8 +4,14 @@ CFLACK
 {% endblock %}
 {% block main %}
 <script src="/static/script.js"></script>
-<input id="mensaje" type="text" aria-label="manda un mensaje">
-<button onclick="setname()" id="enviar" type="submit">send</button>
-<h2 id="saludo"></h2>
-<ul id="lista"></ul>
+<div style="width: 50%;" class="container-fluid p-3 my-3 border bg-light">
+    <h3>WELCOME TO CFLACK</h3><br><br>
+    <input id="mensaje" type="text" aria-label="manda un mensaje">
+    <button id="enviar" type="submit">send</button>
+    <ul id="lista"></ul>
+    <ul id="nombre"></ul>
+</div>
+<!--<div style="width: 50%;" class="container-fluid p-3 my-3 border bg-light">
+
+</div>-->
 {% endblock %}

@@ -14,5 +14,9 @@ document.addEventListener('DOMContentLoaded', () =>{
 })
 
 function setname(){
-    var nombre 
+  const name = document.getElementById("name").value;
+  const nombre = localStorage.setItem("localname", name)
+  socket.on('name', function(name){
+    
+  })
 }
