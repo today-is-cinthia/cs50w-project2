@@ -10,10 +10,14 @@ document.addEventListener('DOMContentLoaded', () =>{
             socket.send($('#mensaje').val());
             $('#mensaje').val('');
           })
+
+          socket.on('message', function(data){
+            localStorage.setItem("name", data.name);
+          })
     });
 })
 
-
 document.querySelector("form").onsubmit = () =>{
   const name = document.querySelector("name").value;
+  
 }
