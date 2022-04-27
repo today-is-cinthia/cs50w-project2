@@ -24,9 +24,6 @@ def handle_message(data):
     print('received message:' + data)
     send(data, broadcast = True)
 
-@socketio.on('name')
-def save_name(name):
-
 
 if __name__ == '__main__':
     socketio.run(app)

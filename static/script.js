@@ -13,10 +13,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     });
 })
 
-function setname(){
-  const name = document.getElementById("name").value;
-  const nombre = localStorage.setItem("localname", name)
-  socket.on('name', function(name){
-    
-  })
+
+document.querySelector("form").onsubmit = () =>{
+  const name = document.querySelector("name").value;
 }
