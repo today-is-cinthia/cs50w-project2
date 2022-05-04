@@ -3,14 +3,13 @@
 CFLACK
 {% endblock %}
 {% block main %}
-<script src="/static/script.js"></script>
 <center>
     <h1 style="font-family: 'Rubik Glitch', cursive; color:antiquewhite;">CFLACK</h1>
     <img src="https://d35aaqx5ub95lt.cloudfront.net/images/331a32943ff73be28537dfc7469d5639.svg"><br>
     <h3 style="font-family: 'Rubik Bubbles', cursive;color: antiquewhite;">Enter your name:</h3><br>
     <form class="form" action="/home" method="post"> 
         <input style="width: 500px;" type="text" name="name"  id="name" placeholder="Ej. Cinthia"><br><br>
-        <button type="submit">Enviar</button>
+        <button onclick="guardarnombre()" type="submit">Enviar</button>
         
         <!--<a href="/home"><button id="button" type="submit" class="btn btn-secondary">Done</button></a>-->
     </form>

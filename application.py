@@ -19,10 +19,18 @@ def index():
 
 @app.route("/home", methods=["GET", "POST"])
 def home():
+    session.clear()
     if request.method == "POST":
-        name = request.form.get("name")
-        print(name)
-    return render_template("home.html", name=name) 
+        nombre = request.form.get("name")
+        for i in nombres:
+            nombres[i] = nombre
+        session.permanent() = True
+    return render_template("home.html") 
+
+@app.route("/logout", methods=["GET", "POST"])
+def logout():
+    session.clear()
+    return redirect("/")
 
 @socketio.on('message')
 def handle_message(data):

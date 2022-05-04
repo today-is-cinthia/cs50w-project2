@@ -11,13 +11,12 @@ document.addEventListener('DOMContentLoaded', () =>{
             $('#mensaje').val('');
           })
 
-          socket.on('message', function(data){
-            localStorage.setItem("name", data.name);
-          })
     });
 })
 
-document.querySelector("form").onsubmit = () =>{
-  const name = document.querySelector("name").value;
-  
+function guardarnombre(){
+  var nom = document.getElementById("name").value;
+  localStorage.setItem("nombre", nom);
 }
+
+
