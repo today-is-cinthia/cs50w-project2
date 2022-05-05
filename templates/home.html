@@ -4,22 +4,20 @@ CFLACK
 {% endblock %}
 {% block main %}
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-    <a class="navbar-brand" href="#">CFLACK</a>
+    <a style="font-family: 'Rubik Bubbles', cursive;color: antiquewhite;" class="navbar-brand" href="#">CFLACK</a>
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
       <li class="nav-item">
         <a class="nav-link" href="/logout">Log out</a>
       </li>
     </ul>
   </nav>
-<div style="width: 100%; height: 70px;" class="container-fluid p-3 my-3 border bg-light">
+  <h1>{{name}}</h1>
+<!-- <div style="width: 100%; height: 70px;" class="container-fluid p-3 my-3 border bg-light">
     <h2 id="contenido"></h2>
 </div>
 
 <input id="mensaje" type="text" aria-label="manda un mensaje">
 <button id="enviar" type="submit">send</button>
-<ul id="lista"></ul>
+<ul id="lista"></ul> -->
 
 {% endblock %}

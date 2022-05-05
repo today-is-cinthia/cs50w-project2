@@ -19,12 +19,15 @@ def index():
 
 @app.route("/home", methods=["GET", "POST"])
 def home():
-    session.clear()
     if request.method == "POST":
-        nombre = request.form.get("name")
+        name = request.form.get("name")
         for i in nombres:
-            nombres[i] = nombre
-        session.permanent() = True
+            if name == i:
+                flash("User already exists")
+        if name == None:
+            flash("required")
+        nombres.append(name)
+        session['name'] = name
     return render_template("home.html") 
 
 @app.route("/logout", methods=["GET", "POST"])

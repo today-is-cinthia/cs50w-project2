@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () =>{
     var socket = io.connect(location.protocol+'//' + document.domain + ':' + location.port);
-    socket.on('connect', () => {
+   /* socket.on('connect', () => {
 
         socket.on('message', function(data) { 
             $('#lista').append('<li>' + data + '</li>')
@@ -11,12 +11,12 @@ document.addEventListener('DOMContentLoaded', () =>{
             $('#mensaje').val('');
           })
 
-    });
+    });*/
+    document.querySelector("#submitname").onclick = () =>{
+      var name = document.querySelector("#name").value
+      localStorage.setItem("name", name)
+      
+    }
+    
 })
-
-function guardarnombre(){
-  var nom = document.getElementById("name").value;
-  localStorage.setItem("nombre", nom);
-}
-
 
