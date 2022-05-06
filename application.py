@@ -12,6 +12,7 @@ app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 socketio = SocketIO(app)
 
 nombres = []
+channels=[]
 
 @app.route("/")
 def index():
@@ -21,18 +22,29 @@ def index():
 def home():
     if request.method == "POST":
         name = request.form.get("name")
-        for i in nombres:
-            if name == i:
-                flash("User already exists")
-        if name == None:
-            flash("required")
+        #for i in nombres:
+         #   if name == i:
+          #      flash("This user already exists. Try again")
+           #     return redirect("/")
         nombres.append(name)
-        session['name'] = name
-    return render_template("home.html") 
+        session['name']=name
+        nombre= session['name']
+        session.permanent=True
 
-@app.route("/logout", methods=["GET", "POST"])
+        channel = request.form.get("channel")
+        for i in channels:
+            if channel == i:
+                flash("This channel already exists. Try again")
+        channels.append(channel)
+
+    else:
+        nombre= session['name']
+        session.permanent=True
+    return render_template("home.html",nombre=nombre, channels=channels) 
+
+@app.route("/logout")
 def logout():
-    session.clear()
+    session.permanent=False
     return redirect("/")
 
 @socketio.on('message')
