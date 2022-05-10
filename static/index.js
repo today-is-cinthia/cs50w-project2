@@ -12,11 +12,18 @@ document.addEventListener('DOMContentLoaded', () =>{
           })
 
     });*/
+    localStorage.getItem("name")
 
     document.querySelector("#submitname").onclick = () =>{
       var name = document.querySelector("#name").value
       localStorage.setItem("name", name)
       
     }
+
+    document.querySelector("#createchanel").onclick = () =>{
+      var canales = document.querySelector("#channel").value
+      localStorage.setItem("channel", canales)
+    }
+    localStorage.getItem("canales")
 })
 

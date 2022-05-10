@@ -15,21 +15,34 @@ CFLACK
       </li>
     </ul>
   </nav>
+  <br><br>{% if get_flashed_messages() %}
+  <header>
+    <div class="alert alert-danger" role="alert">
+      {{ get_flashed_messages() | join(" ") }}
+    </div>
+  </header>
+{% endif %}
 
-  <br><br><div style="height: 550px; width:100%" class="container p-3 my-3 bg-dark text-white">
+  <br><div style="height: 600px; width:500%" class="container p-3 my-3 bg-dark text-white"><br>
     <br><h4>Create your own chanel:</h4><br>
     <p style="color:#A9A9A9 ;">[Note: it has to be a unique name]</p>
     <form class="form" action="/home" method="post">
       <input name="channel" type="text"><br><br>
-      <button type="submit" class="btn btn-light">Create</button>
+      <button id="createchanel" type="submit" class="btn btn-light">Create</button>
     </form>
 
-    <br><h4>Your chanels:</h4><br>
-    {% for i in channels %}
-    <div class="dropdown-menu bg-light">
-      <a class="dropdown-item" href="#">{{i}}</a>
+    <br>
+    <div class="dropdown">
+      <button style="color: black;" type="button" class="btn btn-primary dropdown-toggle bg-light" data-toggle="dropdown">
+        Your channels
+      </button>
+      <div class="dropdown-menu">
+        {% for canales in canal %}
+        <a class="dropdown-item" href="#">{{canales}}</a>
+        {% endfor %}
+      </div>
     </div>
-    {% endfor %}
+  </div>
 
   </div>
 <!-- <div style="width: 100%; height: 70px;" class="container-fluid p-3 my-3 border bg-light">

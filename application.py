@@ -20,7 +20,10 @@ def index():
 
 @app.route("/home", methods=["GET", "POST"])
 def home():
-    if request.method == "POST":
+    if request.method == "GET":
+        nombre= session['name']
+        session.permanent=True
+    else:
         name = request.form.get("name")
         #for i in nombres:
          #   if name == i:
@@ -35,12 +38,11 @@ def home():
         for i in channels:
             if channel == i:
                 flash("This channel already exists. Try again")
+                return redirect("/home")
         channels.append(channel)
+        print(channels)
 
-    else:
-        nombre= session['name']
-        session.permanent=True
-    return render_template("home.html",nombre=nombre, channels=channels) 
+    return render_template("home.html",nombre=nombre, canal=channels) 
 
 @app.route("/logout")
 def logout():
