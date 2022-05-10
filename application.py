@@ -13,6 +13,7 @@ socketio = SocketIO(app)
 
 nombres = []
 channels=[]
+channels=["General"]
 
 @app.route("/")
 def index():
@@ -20,15 +21,13 @@ def index():
 
 @app.route("/home", methods=["GET", "POST"])
 def home():
-    if request.method == "GET":
-        nombre= session['name']
-        session.permanent=True
-    else:
-        name = request.form.get("name")
+    if request.method == "POST":
+                
         #for i in nombres:
          #   if name == i:
           #      flash("This user already exists. Try again")
            #     return redirect("/")
+        name = request.form.get("name")
         nombres.append(name)
         session['name']=name
         nombre= session['name']
@@ -41,6 +40,10 @@ def home():
                 return redirect("/home")
         channels.append(channel)
         print(channels)
+    else:
+        if request.method == "GET":
+            nombre= session['name']
+            session.permanent=True
 
     return render_template("home.html",nombre=nombre, canal=channels) 
 

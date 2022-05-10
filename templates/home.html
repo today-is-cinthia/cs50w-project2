@@ -8,7 +8,7 @@ CFLACK
     <a style="font-family: 'Rubik Bubbles', cursive;color: antiquewhite;" class="navbar-brand" href="#">CFLACK</a>
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="">¡Welcome {{nombre}}!</a>
+        <a class="nav-link" href="">¡Welcome  {{nombre}}!</a>
       </li>
       <li class="nav-item">
         <a id="salir" class="nav-link" href="/logout">Log out</a>
@@ -22,29 +22,36 @@ CFLACK
     </div>
   </header>
 {% endif %}
-
-  <br><div style="height: 600px; width:500%" class="container p-3 my-3 bg-dark text-white"><br>
+  <div style="height: 480px; width:100%" class="container p-3 my-3 bg-dark text-white">
+    <div style="margin-left: 2%;float: left; width: 30%;height: 90%;" class="container p-3 my-3 bg-light text-dark">
     <br><h4>Create your own chanel:</h4><br>
     <p style="color:#A9A9A9 ;">[Note: it has to be a unique name]</p>
     <form class="form" action="/home" method="post">
       <input name="channel" type="text"><br><br>
-      <button id="createchanel" type="submit" class="btn btn-light">Create</button>
+      <button id="createchanel" type="submit" class="btn btn-dark">Create</button>
     </form>
 
     <br>
     <div class="dropdown">
-      <button style="color: black;" type="button" class="btn btn-primary dropdown-toggle bg-light" data-toggle="dropdown">
+      <button style="background-color:#A9A9A9 ;color: black;" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
         Your channels
       </button>
-      <div class="dropdown-menu">
+      <div id="menu" class="dropdown-menu">
         {% for canales in canal %}
         <a class="dropdown-item" href="#">{{canales}}</a>
         {% endfor %}
       </div>
     </div>
   </div>
+  
+  <div id="pantallamensajes" style="float: right; width: 65%; height: 90%; margin-right: 2%;" class="container p-3 my-3 bg-light text-dark">
+  <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia voluptatum nam, maiores fuga eveniet, nihil laborum voluptate fugit quam incidunt maxime autem omnis sed perferendis molestias enim nemo aspernatur explicabo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime minima blanditiis autem eos consectetur at. Itaque accusantium omnis sequi, deleniti ad hic aspernatur perspiciatis fugiat necessitatibus voluptatem illum fugit nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita fugiat vitae quas enim temporibus quos beatae unde quod laborum labore aperiam, consequatur dolorem voluptates quasi amet excepturi quam rem quo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita unde nesciunt tempora doloribus, dolores, consectetur ipsa voluptatibus numquam repellat reiciendis mollitia omnis minus dicta? Omnis ab eos veniam porro quaerat. Lorem ipsum, dolor sit amet consectetur adipisicing elit. At placeat dolorem ab recusandae tempore perferendis, veniam neque excepturi totam exercitationem, necessitatibus nisi sequi autem ea porro consectetur fugiat reiciendis dolores? Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis laudantium et ex eveniet officia quia exercitationem nam facilis assumenda minus obcaecati, omnis velit animi molestiae ipsum! Modi ipsa hic sequi!. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio nesciunt, sapiente quasi doloremque labore reprehenderit quod blanditiis aspernatur ea qui, distinctio eligendi earum autem mollitia odio consectetur sint sequi ut? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores, cupiditate debitis. Saepe expedita, voluptates beatae explicabo enim reiciendis dicta quia. Impedit consectetur dolores itaque dolorum atque natus tempore esse iusto. Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ratione provident repellendus perferendis rem dolorem, aut harum laudantium eum dignissimos consequuntur adipisci, facere dolor necessitatibus numquam nisi cumque dolores enim voluptate est officiis cupiditate! Iste, dignissimos! Nisi porro quaerat similique a quod accusamus fugiat voluptatem quibusdam, rerum quisquam impedit ad suscipit eius at odio vero, dolores pariatur ipsa debitis? Sint vel distinctio earum doloribus facere expedita necessitatibus, accusamus voluptate, magnam harum alias, sit cumque perspiciatis tenetur! Magni deserunt qui et reiciendis vitae molestias animi rem unde cum harum eum autem dicta laborum ut, enim blanditiis eius minima impedit! Ab quia iure enim quam harum recusandae consectetur iste omnis perspiciatis et numquam, minus doloremque, architecto sint beatae aperiam exercitationem quo non voluptas facere magnam ut est? Eveniet facilis sint reprehenderit deleniti quos velit iure vero, optio, accusantium veritatis quisquam quae corporis omnis eligendi distinctio. Aliquid asperiores libero, illum possimus eius officia ducimus alias. Asperiores dicta debitis obcaecati tempore sint, enim similique quos, quae praesentium numquam excepturi ipsa eaque accusantium voluptas totam, reprehenderit labore eum tenetur beatae iste officia sit omnis! Voluptatibus porro quos est maiores assumenda eligendi id! Ab fugit itaque inventore porro error incidunt, deleniti unde fugiat eaque doloremque. Inventore ipsa repudiandae voluptatem, ullam fugiat ex iste exercitationem cumque consequuntur recusandae. Id et quibusdam voluptates hic possimus blanditiis! Totam, repellat optio. Nobis omnis, assumenda earum dicta minima, dignissimos veniam accusantium eum quod, facilis adipisci nesciunt! Esse, veniam. Fuga, mollitia. Numquam consequuntur expedita debitis, quia fuga quas laborum voluptatibus necessitatibus quam. Dolorum unde adipisci ducimus consequatur rerum nesciunt culpa ipsum ea maiores officia. Culpa qui nulla eveniet tempore debitis magnam necessitatibus voluptatum, neque ipsam aspernatur, labore corporis, in provident iste reiciendis tempora dolore adipisci eum. Optio provident et incidunt laborum repellendus dicta ad culpa assumenda voluptates magni commodi atque officia sequi, dolorem dolorum esse nam eos veritatis error fugit pariatur voluptatum aperiam cum ex! Tempora corrupti nulla repudiandae cumque rem sed blanditiis eaque ab, nemo eum quo minus sunt voluptates vel sint dolores facere voluptatibus sapiente similique at explicabo. Adipisci reprehenderit obcaecati maiores numquam repudiandae nobis eos mollitia itaque laboriosam reiciendis quam nihil saepe, enim tenetur velit quibusdam beatae esse! Officiis adipisci, amet veniam consequuntur soluta doloremque doloribus quisquam quo iste minima eligendi obcaecati consectetur? Mollitia natus repudiandae voluptates omnis est esse sunt? Sunt, dolorem vitae totam iusto fugit nisi officia in architecto officiis quo assumenda. Ab, earum ad blanditiis mollitia, iusto atque harum consequuntur id, accusamus et architecto! Tenetur laboriosam, quibusdam voluptatum architecto consequuntur dolores repudiandae? Repellat nesciunt soluta ullam harum possimus natus non labore iure incidunt cupiditate sapiente maiores fugit saepe nemo ipsa magni, in itaque tenetur praesentium ducimus asperiores quidem perferendis necessitatibus odio. Fugiat, quia fuga molestias unde praesentium sapiente provident quae dolorum neque temporibus repudiandae dolorem nobis aperiam quis suscipit excepturi officia ipsum dolore facilis. Illum asperiores quis assumenda omnis quia corporis aperiam obcaecati adipisci cum, autem molestias, fuga sapiente quaerat maxime explicabo, doloremque eaque cumque ratione in libero facilis neque odit ad dignissimos? Atque, facere odit!</p>
 
-  </div>
+</div> 
+<input style="float: right;" type="text">
+</div>
+
+
 <!-- <div style="width: 100%; height: 70px;" class="container-fluid p-3 my-3 border bg-light">
     <h2 id="contenido"></h2>
 </div>
