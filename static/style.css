@@ -12,9 +12,22 @@ body
     overflow-y: auto;
     border-radius: 10px 20px 15px 10px;
 }       
+#fondo,#enviar, #mensaje, #lista{
+    border-radius: 10px 20px 15px 10px;
+}
 
 #menu{
     height: 100px;
     overflow-y: auto;
+}
+
+#lista{
+    display: block;
+    background-color:white;
+    color: black;
+    width: 400px;
+    display: block;
+    text-align: right;
+    float: right;
 }
 

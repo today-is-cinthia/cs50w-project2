@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded',() => {
 
     });*/
 
-localStorage.getItem("name")
+var name = localStorage.getItem("name")
 
 document.querySelector("#salir").onclick = () =>{
   localStorage.getItem("name")
@@ -24,5 +24,18 @@ document.querySelector("#createchanel").onclick = () =>{
   localStorage.setItem("channel", canales)
 }
 localStorage.getItem("canales")
+
+socket.on('connect', () => {
+
+        socket.on('message', function(data) { 
+          $('#lista').append('<div class="lista"><h6 >' + name + '</h6><small>' + data + '</small></div>')  
+          })
+      
+          $('#enviar').on('click', function() {
+            socket.send($('#mensaje').val());
+            $('#mensaje').val('');
+          })
+
+    });
 })
 
