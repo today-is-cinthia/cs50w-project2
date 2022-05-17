@@ -1,17 +1,5 @@
 document.addEventListener('DOMContentLoaded',() => {
     var socket = io.connect(location.protocol+'//' + document.domain + ':' + location.port);
-       /* socket.on('connect', () => {
-
-        socket.on('message', function(data) { 
-            $('#lista').append('<li>' + data + '</li>')
-          })
-      
-          $('#enviar').on('click', function() {
-            socket.send($('#mensaje').val());
-            $('#mensaje').val('');
-          })
-
-    });*/
 
 var name = localStorage.getItem("name")
 
@@ -24,6 +12,19 @@ document.querySelector("#createchanel").onclick = () =>{
   localStorage.setItem("channel", canales)
 }
 localStorage.getItem("canales")
+
+socket.on('connect', () = {
+  socket.on('add channel',function(data){
+    $('#menu').append('<a class="dropdown-item" href="#">' + data["channel"] +'</a>' )
+  })
+  $('#createchanel').on('click', function() {
+    socket.emit($('#channel').val());
+    $('#channel').val('');
+  })
+})
+
+const boton = document.querySelector('#enviar')
+boton.disabled=true;
 
 socket.on('connect', () => {
 

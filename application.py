@@ -46,6 +46,11 @@ def home():
             session.permanent=True
 
     return render_template("home.html",nombre=nombre, canal=channels) 
+    
+@socketio.on("add channel")
+def add_chanel(data):
+    emit('display channels',data["channel"], broadcast=True)
+
 
 @app.route("/logout")
 def logout():
