@@ -15,6 +15,8 @@ nombres = []
 channels=[]
 channels=["General"]
 
+
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -22,22 +24,19 @@ def index():
 @app.route("/home", methods=["GET", "POST"])
 def home():
     if request.method == "POST":
-                
+        name = request.form.get("name")
         #for i in nombres:
          #   if name == i:
           #      flash("This user already exists. Try again")
            #     return redirect("/")
-        name = request.form.get("name")
         nombres.append(name)
         session['name']=name
-        nombre= session['name']
         session.permanent=True
 
         channel = request.form.get("channel")
-        for i in channels:
-            if channel == i:
-                flash("This channel already exists. Try again")
-                return redirect("/home")
+        if channel in channels:
+            flash("This channel already exists. Please try again")
+            return redirect("/home")
         channels.append(channel)
         print(channels)
     else:
@@ -45,12 +44,35 @@ def home():
             nombre= session['name']
             session.permanent=True
 
-    return render_template("home.html",nombre=nombre, canal=channels) 
+    return render_template("home.html",nombre=name, canal=channels) 
+
+@app.route("/canal/<canales>", methods=['GET','POST'])
+def canal(canales):
+    mensajes=[]
+    if canales not in channels:
+        return redirect("/canal/General")
+        
+    name= session['name']
+
+    mensaje = request.form.get("mensaje")
+
+    if mensaje == "":
+        flash("Please fill the message field")
+        return redirect("/canal/<canales>")
+    else:
+        mensajes.append(mensaje)
+    return render_template("home.html", nombre=name, canal=channels, mensajes = mensajes)
     
 @socketio.on("add channel")
 def add_chanel(data):
     emit('display channels',data["channel"], broadcast=True)
 
+@socketio.on('joined')
+def joined(data):
+    username = data['username']
+    room = data['room']
+    join_room(room)
+    send(username + ' has entered the room.', to=room)
 
 @app.route("/logout")
 def logout():

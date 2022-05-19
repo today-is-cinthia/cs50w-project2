@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded',() => {
     var socket = io.connect(location.protocol+'//' + document.domain + ':' + location.port);
 
-var name = localStorage.getItem("name")
+ var name = localStorage.getItem("name")
 
+//borrar del almacenamiento nombre al salir
 document.querySelector("#salir").onclick = () =>{
   localStorage.getItem("name")
   localStorage.removeItem("name")
@@ -11,25 +12,27 @@ document.querySelector("#createchanel").onclick = () =>{
   var canales = document.querySelector("#channel").value
   localStorage.setItem("channel", canales)
 }
-localStorage.getItem("canales")
 
-socket.on('connect', () = {
-  socket.on('add channel',function(data){
-    $('#menu').append('<a class="dropdown-item" href="#">' + data["channel"] +'</a>' )
-  })
-  $('#createchanel').on('click', function() {
-    socket.emit($('#channel').val());
-    $('#channel').val('');
-  })
+localStorage.getItem("channel")
+
+socket.on('connect', () =>{
+  
+  socket.on('message', function(data) { 
+    $('#lista').append('<h6 >' + name + '</h6><small>' + data + '</small>')  
+    })
+
+    $('#enviar').on('click', function() {
+      socket.send($('#mensaje').val());
+      $('#mensaje').val('');
+    })
+
+})
 })
 
-const boton = document.querySelector('#enviar')
-boton.disabled=true;
-
-socket.on('connect', () => {
+/*socket.on('connect', () => {
 
         socket.on('message', function(data) { 
-          $('#lista').append('<div class="lista"><h6 >' + name + '</h6><small>' + data + '</small></div>')  
+          $('#lista').append('<h6 >' + name + '</h6><small>' + data + '</small>')  
           })
       
           $('#enviar').on('click', function() {
@@ -37,6 +40,5 @@ socket.on('connect', () => {
             $('#mensaje').val('');
           })
 
-    });
-})
+    });*/
 

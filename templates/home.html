@@ -8,7 +8,7 @@ CFLACK
     <a style="font-family: 'Rubik Bubbles', cursive;color: antiquewhite;" class="navbar-brand" href="#">CFLACK</a>
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="">¡Welcome  {{nombre}}!</a>
+        <a class="nav-link" href="">¡Welcome to CFLACK!</a>
       </li>
       <li class="nav-item">
         <a id="salir" class="nav-link" href="/logout">Log out</a>
@@ -38,7 +38,7 @@ CFLACK
       </button>
       <div id="menu" class="dropdown-menu">
         {% for canales in canal %}
-        <a class="dropdown-item" href="#">{{canales}}</a>
+        <a class="dropdown-item" href="/canal/{{canales}}">{{canales}}</a>
         {% endfor %}
       </div>
     </div>
@@ -46,9 +46,26 @@ CFLACK
   
   <div id="pantallamensajes" style="float: right; width: 65%; height: 80%; margin-right: 2%; background-color: aquamarine;" class="container p-3 my-3">
     <div id="lista">
-
+      {% for i in mensajes %}
+      <h6>{{nombre}}</h6>
+      <small>{{i}}</small>
+      {% endfor %}
     </div>
   </div>
+  <script>
+    document.querySelector('#enviar').disabled = true;
+    document.querySelector('#mensaje').onkeyup = function() {
+        let message = document.querySelector('#mensaje').value;
+
+        if (message.length > 0 ){
+            document.querySelector('#enviar').disabled = false;
+        }
+        else {
+            document.querySelector('#enviar').disabled = true;
+        }
+    }
+</script>
+
 
 <input id="mensaje" style="float: right; margin-right: 2%;width: 65%; height: 7%" type="text">
 <button id="enviar" style="float: right; margin-right:2%;margin-top: -2.8%; height: 7%; width: 8%;"type="submit" class="btn btn-success">send</button>
