@@ -12,9 +12,8 @@ app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 socketio = SocketIO(app)
 
 nombres = []
-channels=[]
+channels=dict()
 channels=["General"]
-
 
 
 @app.route("/")
@@ -81,7 +80,8 @@ def logout():
 
 @socketio.on('message')
 def handle_message(data):
-    print('received message:' + data)
+    #print('received message:' + data)
+
     send(data, broadcast = True)
 
 

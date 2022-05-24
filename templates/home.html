@@ -4,6 +4,7 @@ CFLACK
 {% endblock %}
 {% block main %}
 <script src="/static/home.js"></script>
+
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
     <a style="font-family: 'Rubik Bubbles', cursive;color: antiquewhite;" class="navbar-brand" href="#">CFLACK</a>
     <ul class="navbar-nav">
@@ -52,23 +53,10 @@ CFLACK
       {% endfor %}
     </div>
   </div>
-  <script>
-    document.querySelector('#enviar').disabled = true;
-    document.querySelector('#mensaje').onkeyup = function() {
-        let message = document.querySelector('#mensaje').value;
-
-        if (message.length > 0 ){
-            document.querySelector('#enviar').disabled = false;
-        }
-        else {
-            document.querySelector('#enviar').disabled = true;
-        }
-    }
-</script>
 
 
 <input id="mensaje" style="float: right; margin-right: 2%;width: 65%; height: 7%" type="text">
-<button id="enviar" style="float: right; margin-right:2%;margin-top: -2.8%; height: 7%; width: 8%;"type="submit" class="btn btn-success">send</button>
+<button id="enviar" style="float: right; margin-right:2%;margin-top: -2.8%; height: 7%; width: 8%;" type="submit" class="btn btn-success">send</button>
 </div> 
 </div>
 

@@ -27,6 +27,20 @@ socket.on('connect', () =>{
     })
 
 })
+
+document.querySelector("#enviar").onsubmit = () =>{
+  const name_usuario = localStorage.getItem("name");
+  const nombre_canal = localStorage.getItem("channel");
+  const mensaje =  document.querySelector("#mensaje").value;
+
+  const tiempo_instancia = new Date();
+
+  const tiempo = tiempo_instancia.toLocaleString('es-ES', {hour:'numeric', minute: 'numeric', hour12: true})
+  var fecha = tiempo_instancia.toDateString();
+  fecha = fecha.slice(4, fecha.length);
+
+  socket.emit('mensaje enviado', nombre_canal, name_usuario, mensaje, tiempo, fecha);
+}
 })
 
 /*socket.on('connect', () => {
