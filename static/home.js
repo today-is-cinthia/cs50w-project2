@@ -10,12 +10,20 @@ document.querySelector("#salir").onclick = () =>{
 }
 document.querySelector("#createchanel").onclick = () =>{
   var canales = document.querySelector("#channel").value
+
+  socket.emit('add channel', canales)
+
   localStorage.setItem("channel", canales)
 }
 
 localStorage.getItem("channel")
 
-socket.on('connect', () =>{
+socket.on('display channels', canales => {
+  var noselaverdad = document.createElement("a");
+  noselaverdad.innerHTML = ''
+})
+
+/*socket.on('connect', () =>{
   
   socket.on('message', function(data) { 
     $('#lista').append('<h6 >' + name + '</h6><small>' + data + '</small>')  
@@ -26,7 +34,7 @@ socket.on('connect', () =>{
       $('#mensaje').val('');
     })
 
-})
+})*/
 
 document.querySelector("#enviar").onsubmit = () =>{
   const name_usuario = localStorage.getItem("name");
@@ -41,6 +49,11 @@ document.querySelector("#enviar").onsubmit = () =>{
 
   socket.emit('mensaje enviado', nombre_canal, name_usuario, mensaje, tiempo, fecha);
 }
+
+socket.on('mensaje recibido', recibido => {
+  const nombrecanal = recibido.nombre_canal;
+
+})
 })
 
 /*socket.on('connect', () => {

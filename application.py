@@ -32,12 +32,12 @@ def home():
         session['name']=name
         session.permanent=True
 
-        channel = request.form.get("channel")
-        if channel in channels:
-            flash("This channel already exists. Please try again")
-            return redirect("/home")
-        channels.append(channel)
-        print(channels)
+        #channel = request.form.get("channel")
+        #if channel in channels:
+         #   flash("This channel already exists. Please try again")
+          #  return redirect("/home")
+       # channels.append(channel)
+        #print(channels)
     else:
         if request.method == "GET":
             nombre= session['name']
@@ -45,26 +45,31 @@ def home():
 
     return render_template("home.html",nombre=name, canal=channels) 
 
-@app.route("/canal/<canales>", methods=['GET','POST'])
-def canal(canales):
-    mensajes=[]
-    if canales not in channels:
-        return redirect("/canal/General")
+#@app.route("/canal/<canales>", methods=['GET','POST'])
+#def canal(canales):
+ #   mensajes=[]
+  #  if canales not in channels:
+   #     return redirect("/canal/General")
         
-    name= session['name']
+    #name= session['name']
 
-    mensaje = request.form.get("mensaje")
+    #mensaje = request.form.get("mensaje")
 
-    if mensaje == "":
-        flash("Please fill the message field")
-        return redirect("/canal/<canales>")
-    else:
-        mensajes.append(mensaje)
-    return render_template("home.html", nombre=name, canal=channels, mensajes = mensajes)
+    #if mensaje == "":
+     #   flash("Please fill the message field")
+      #  return redirect("/canal/<canales>")
+    #else:
+     #   mensajes.append(mensaje)
+    #return render_template("home.html", nombre=name, canal=channels, mensajes = mensajes)
     
 @socketio.on("add channel")
-def add_chanel(data):
-    emit('display channels',data["channel"], broadcast=True)
+def add_chanel(canales):
+    if canales in channels:
+        flash("Este canal ya existe. Por favor intente nuevamente")
+    else:
+        channels.append(channel)
+
+    emit('display channels',canales, broadcast=True)
 
 @socketio.on('joined')
 def joined(data):
@@ -78,11 +83,13 @@ def logout():
     session.permanent=False
     return redirect("/")
 
-@socketio.on('message')
-def handle_message(data):
-    #print('received message:' + data)
+@socketio.on('mensaje enviado')
+def handle_message(nombre_canal, name_usuario, mensaje, tiempo, fecha):
+    contenido = (name_usuario, mensaje, tiempo, fecha)
 
-    send(data, broadcast = True)
+    #print('received message:' + data)
+    channels[nombre_canal].append(contenido)
+    emit('mensaje recibido', {'nombrecanal': nombre_canal, 'data' : contenido}, broadcast=True)
 
 
 if __name__ == '__main__':
