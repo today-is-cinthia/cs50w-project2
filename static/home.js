@@ -20,7 +20,8 @@ localStorage.getItem("channel")
 
 socket.on('display channels', canales => {
   var noselaverdad = document.createElement("a");
-  noselaverdad.innerHTML = ''
+  noselaverdad.innerHTML =  `<buttton class="btn btn-link" data-channel="${canales}">${canales}</button>`;
+  document.querySelector("#menu").append(noselaverdad)
 })
 
 /*socket.on('connect', () =>{
