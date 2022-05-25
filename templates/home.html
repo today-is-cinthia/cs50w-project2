@@ -38,7 +38,9 @@ CFLACK
         Your channels
       </button>
       <div id="menu" class="dropdown-menu">
-        <a class="dropdown-item" href=""></a>
+        {% for i in canal %}
+        <a class="dropdown-item"><button class="btn btn-link" data-channel="{{i}}">{{i}}</button></a>
+        {% endfor %}
       </div>
     </div>
   </div>

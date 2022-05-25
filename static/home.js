@@ -20,22 +20,23 @@ localStorage.getItem("channel")
 
 socket.on('display channels', canales => {
   var noselaverdad = document.createElement("a");
+  noselaverdad.classList.add('dropdown-item');
   noselaverdad.innerHTML =  `<buttton class="btn btn-link" data-channel="${canales}">${canales}</button>`;
   document.querySelector("#menu").append(noselaverdad)
+  boton_canal =document.querySelectorAll(".btn btn-link");
+  boton_canal.forEach(boton_canal =>{
+    boton_canal.onclick = () =>{
+      var establecer_canal = boton_canal.dataset.channel;
+      var mequedesinideas= localStorage.getItem("name");
+      socket.emit('joined', establecer_canal, mequedesinideas);
+    }
+  })
 })
 
-/*socket.on('connect', () =>{
-  
-  socket.on('message', function(data) { 
-    $('#lista').append('<h6 >' + name + '</h6><small>' + data + '</small>')  
-    })
-
-    $('#enviar').on('click', function() {
-      socket.send($('#mensaje').val());
-      $('#mensaje').val('');
-    })
-
-})*/
+socket.on('unirse al canal', data =>{
+  localStorage.setItem("canal_actual", data.establecer_canal)
+  alert(`Bienvenido a ${data.establecer_canal}`)
+})
 
 document.querySelector("#enviar").onsubmit = () =>{
   const name_usuario = localStorage.getItem("name");

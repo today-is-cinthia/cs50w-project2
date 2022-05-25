@@ -40,7 +40,7 @@ def home():
         #print(channels)
     else:
         if request.method == "GET":
-            nombre= session['name']
+            name= session['name']
             session.permanent=True
 
     return render_template("home.html",nombre=name, canal=channels) 
@@ -67,16 +67,13 @@ def add_chanel(canales):
     if canales in channels:
         flash("Este canal ya existe. Por favor intente nuevamente")
     else:
-        channels.append(channel)
-
-    emit('display channels',canales, broadcast=True)
+        channels.append(canales)
+        print(channels)
+        emit('display channels',canales, broadcast=True)
 
 @socketio.on('joined')
-def joined(data):
-    username = data['username']
-    room = data['room']
-    join_room(room)
-    send(username + ' has entered the room.', to=room)
+def joined(establecer_canal, mequedesinideas):
+    emit("unirse al canal", {"channelname": establecer_canal, "messages": channels[establecer_canal]})
 
 @app.route("/logout")
 def logout():
