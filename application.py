@@ -73,7 +73,7 @@ def add_chanel(canales):
 
 @socketio.on('joined')
 def joined(establecer_canal, mequedesinideas):
-    emit("unirse al canal", {"channelname": establecer_canal, "messages": channels[establecer_canal]})
+    emit("unirse al canal", {"nombre_canal": establecer_canal, "messages": channels[establecer_canal]})
 
 @app.route("/logout")
 def logout():

@@ -13,10 +13,9 @@ document.querySelector("#createchanel").onclick = () =>{
 
   socket.emit('add channel', canales)
 
-  localStorage.setItem("channel", canales)
 }
 
-localStorage.getItem("channel")
+canal_actual=localStorage.getItem("current_channel")
 
 socket.on('display channels', canales => {
   var noselaverdad = document.createElement("a");
@@ -24,9 +23,10 @@ socket.on('display channels', canales => {
   noselaverdad.innerHTML =  `<buttton class="btn btn-link" data-channel="${canales}">${canales}</button>`;
   document.querySelector("#menu").append(noselaverdad)
   boton_canal =document.querySelectorAll(".btn btn-link");
-  boton_canal.forEach(boton_canal =>{
-    boton_canal.onclick = () =>{
-      var establecer_canal = boton_canal.dataset.channel;
+  boton_canal.forEach(button =>{
+    button.onclick = () =>{
+      localStorage.setItem("current_channel", button)
+      var establecer_canal = button.dataset.channel;
       var mequedesinideas= localStorage.getItem("name");
       socket.emit('joined', establecer_canal, mequedesinideas);
     }
@@ -36,7 +36,36 @@ socket.on('display channels', canales => {
 socket.on('unirse al canal', data =>{
   localStorage.setItem("canal_actual", data.establecer_canal)
   alert(`Bienvenido a ${data.establecer_canal}`)
+
+  var mensajespqyanosequehacer = data.channels[data.nombrecanal]
+  
+  for(i = 0; i <mensajespqyanosequehacer; i++){
+
+    div = document.createElement('div');
+  }
+
 })
+
+//mensajes
+/*socket.on('connect', ()=>{
+  document.querySelector("#enviar").onclick = () =>{
+    if(canal_actual == ""){
+      alert("You have to join a channel first")
+    }else{
+      
+      socket.on('message', function(data) { 
+        $('#lista').append('<h6 >' + name + '</h6><small>' + data + '</small>')  
+        })
+    
+        $('#enviar').on('click', function() {
+          socket.send($('#mensaje').val());
+          $('#mensaje').val('');
+        })
+
+    }
+  }
+})*/
+
 
 document.querySelector("#enviar").onsubmit = () =>{
   const name_usuario = localStorage.getItem("name");
@@ -54,7 +83,7 @@ document.querySelector("#enviar").onsubmit = () =>{
 
 socket.on('mensaje recibido', recibido => {
   const nombrecanal = recibido.nombre_canal;
-
+  
 })
 })
 
