@@ -14,7 +14,7 @@ socketio = SocketIO(app)
 nombres = []
 channels=dict()
 channels=["General"]
-
+mensajes= {}
 
 @app.route("/")
 def index():
@@ -88,6 +88,10 @@ def handle_message(nombre_canal, name_usuario, mensaje, tiempo, fecha):
     channels[nombre_canal].append(contenido)
     emit('mensaje recibido', {'nombrecanal': nombre_canal, 'data' : contenido}, broadcast=True)
 
+@socketio.on('message') 
+def handle_Message(data): 
+    print('Mensaje: ' + data) 
+    send(data, broadcast = True)
 
 if __name__ == '__main__':
     socketio.run(app)

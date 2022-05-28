@@ -15,7 +15,6 @@ document.querySelector("#createchanel").onclick = () =>{
 
 }
 
-canal_actual=localStorage.getItem("current_channel")
 
 socket.on('display channels', canales => {
   var noselaverdad = document.createElement("a");
@@ -25,24 +24,45 @@ socket.on('display channels', canales => {
   boton_canal =document.querySelectorAll(".btn btn-link");
   boton_canal.forEach(button =>{
     button.onclick = () =>{
-      localStorage.setItem("current_channel", button)
       var establecer_canal = button.dataset.channel;
+
       var mequedesinideas= localStorage.getItem("name");
       socket.emit('joined', establecer_canal, mequedesinideas);
     }
   })
 })
 
+document.querySelectorAll(".btn btn-link").forEach(button=>{
+button.onclick= () =>{
+  const establecer_canal = button.dataset.channel;
+
+  const mequedesinideas= localStorage.getItem("name");
+      socket.emit('joined', establecer_canal, mequedesinideas);
+}
+})
+
+
 socket.on('unirse al canal', data =>{
-  localStorage.setItem("canal_actual", data.establecer_canal)
-  alert(`Bienvenido a ${data.establecer_canal}`)
+  localStorage.setItem("current_channel", data.nombre_canal)
+  alert(`Bienvenido a ${data.nombre_canal}`)
 
-  var mensajespqyanosequehacer = data.channels[data.nombrecanal]
-  
-  for(i = 0; i <mensajespqyanosequehacer; i++){
-
-    div = document.createElement('div');
+  const mensajespqyanosequehacer = data.channels[data.nombre_canal]
+  for(var i = 0; i < mensajespqyanosequehacer.length; i++){
+    usuario =  mensajespqyanosequehacer[i][0];
+    fecha = mensajespqyanosequehacer[i][1];
+    tiempo = mensajespqyanosequehacer[i][2];
+    mensaje = mensajespqyanosequehacer[i][3];
+    div = document.createElement("div");
+    if(username === storage.getItem("name")){
+      div.innerHTML = `<div class="alert alert-success" role="alert" style="text-align:right; float:right; width: 70%; overflow-wrap: anywhere; word-wrap: break-word;"><strong> ${usuario}: </strong> <div> ${mensaje} </div> <small> ${fecha} ${tiempo} </small>`;
+  }else{
+      div.innerHTML = `<div class="alert alert-primary" role="alert" style="text-align:left; float:left; width: 70%; overflow-wrap: anywhere; word-wrap: break-word;"><strong> ${usuario}: </strong> <div> ${mensaje} </div> <small> ${fecha} ${tiempo} </small>`;
   }
+  document.querySelector('#lista').append(div);
+
+  }
+  
+  
 
 })
 
@@ -69,7 +89,7 @@ socket.on('unirse al canal', data =>{
 
 document.querySelector("#enviar").onsubmit = () =>{
   const name_usuario = localStorage.getItem("name");
-  const nombre_canal = localStorage.getItem("channel");
+  const nombre_canal = localStorage.getItem("currentchannel");
   const mensaje =  document.querySelector("#mensaje").value;
 
   const tiempo_instancia = new Date();
@@ -82,12 +102,25 @@ document.querySelector("#enviar").onsubmit = () =>{
 }
 
 socket.on('mensaje recibido', recibido => {
-  const nombrecanal = recibido.nombre_canal;
-  
-})
+  const nombrecanal = recibido.nombrecanal;
+  const data = received.data;
+  const usuario = data[0];
+  const fecha = data[1];
+  const tiempo = data[2];
+  const mensaje = data[3];
+
+  if(nombrecanal === storage.getItem("currentchannel")){
+    const div = document.createElement('div');
+    if(usuario === storage.getItem("name")){
+        div.innerHTML = `<div class="alert alert-success" role="alert" style="text-align:right; float:right; width: 70%; overflow-wrap: anywhere; word-wrap: break-word;"><strong> ${usuario}: </strong> <div> ${mensaje} </div> <small> ${fecha} ${tiempo} </small>`;
+    }else{
+        div.innerHTML = `<div class="alert alert-primary" role="alert" style="text-align:left; float:left; width: 70%; overflow-wrap: anywhere; word-wrap: break-word;"><strong> ${usuario}: </strong> <div> ${mensaje} </div> <small> ${fecha} ${tiempo} </small>`;
+    }
+    document.querySelector('#lista').append(div);
+}
 })
 
-/*socket.on('connect', () => {
+socket.on('connect', () => {
 
         socket.on('message', function(data) { 
           $('#lista').append('<h6 >' + name + '</h6><small>' + data + '</small>')  
@@ -98,5 +131,5 @@ socket.on('mensaje recibido', recibido => {
             $('#mensaje').val('');
           })
 
-    });*/
-
+    });
+  })
