@@ -39,7 +39,7 @@ CFLACK
       </button>
       <div id="menu" class="dropdown-menu">
         {% for i in canal %}
-        <a class="dropdown-item"><button class="btn btn-link" data-channel="{{i}}">{{i}}</button></a>
+        <a class="dropdown-item"><button value={{i}} id="canalboton" class="btn btn-link" data-channel={{i}}>{{i}}</button></a>
         {% endfor %}
       </div>
     </div>
@@ -47,6 +47,8 @@ CFLACK
   
   <div id="pantallamensajes" style="float: right; width: 65%; height: 80%; margin-right: 2%; background-color: aquamarine;" class="container p-3 my-3">
     <div id="lista">
+    </div>
+    <div style="float: left;" id="listarecibido">
     </div>
   </div>
 

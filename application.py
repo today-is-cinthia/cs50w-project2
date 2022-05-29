@@ -14,7 +14,6 @@ socketio = SocketIO(app)
 nombres = []
 channels=dict()
 channels=["General"]
-mensajes= {}
 
 @app.route("/")
 def index():
@@ -80,13 +79,6 @@ def logout():
     session.permanent=False
     return redirect("/")
 
-@socketio.on('mensaje enviado')
-def handle_message(nombre_canal, name_usuario, mensaje, tiempo, fecha):
-    contenido = (name_usuario, mensaje, tiempo, fecha)
-
-    #print('received message:' + data)
-    channels[nombre_canal].append(contenido)
-    emit('mensaje recibido', {'nombrecanal': nombre_canal, 'data' : contenido}, broadcast=True)
 
 @socketio.on('message') 
 def handle_Message(data): 
