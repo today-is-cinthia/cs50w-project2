@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded',() => {
     var socket = io.connect(location.protocol+'//' + document.domain + ':' + location.port);
 
  var name = localStorage.getItem("name")
+ var canal_storage = localStorage.getItem("currentchannel")
 
 //borrar del almacenamiento nombre al salir
 document.querySelector("#salir").onclick = () =>{
@@ -38,10 +39,61 @@ for(var i= 0; i< listadebotones.length; i++){
   listadebotones[i].addEventListener('click', function(){
     botoncanal = this.value
     localStorage.setItem("currentchannel", botoncanal)
+    alert("¡  You have joined to " +localStorage.getItem("currentchannel") + "  !  🥰")
+    document.querySelector("#enviar").disabled=false;
   })
 }
 
-localStorage.getItem("currentchannel")
+
+/*ocument.querySelector("#enviar").onsubmit = () =>{
+  const name_usuario = localStorage.getItem("name");
+  const nombre_canal = localStorage.getItem("currentchannel");
+  const mensaje =  document.querySelector("#mensaje").value;
+
+  const tiempo_instancia = new Date();
+
+  const tiempo = tiempo_instancia.toLocaleString('es-ES', {hour:'numeric', minute: 'numeric', hour12: true})
+  var fecha = tiempo_instancia.toDateString();
+  fecha = fecha.slice(4, fecha.length);
+
+  socket.emit('mensaje enviado', nombre_canal, name_usuario, mensaje, tiempo, fecha);
+}*/
+
+socket.on('connect', () =>{
+  elmensaje= document.querySelector("#mensaje").value
+  socket.emit('add message', elmensaje, canal_storage)
+})
+
+  if(canal_storage == undefined){
+    document.querySelector("#enviar").disabled=true;
+}
+
+socket.on('connect', () => {
+
+  socket.on('message', function(data) { 
+    $('#lista').append('<h6 >' + name + '</h6><small>' + data + '</small>')  
+    })
+
+    $('#enviar').on('click', function() {
+      socket.send($('#mensaje').val());
+      $('#mensaje').val('');
+    })
+
+});
+
+
+// socket.on('connect', () => {
+
+  // socket.on('joined', function(canal_storage,name) { 
+    // $('#bienvenida').append('<h6 >' + name + '</h6>')  
+    // })
+
+    // $('#enviar').on('click', function() {
+      // socket.send($('#mensaje').val());
+      // $('#mensaje').val('');
+    // })
+
+// });
 
 /*socket.on('unirse al canal', data =>{
   localStorage.setItem("currentchannel", data.nombre_canal)
@@ -88,22 +140,8 @@ localStorage.getItem("currentchannel")
 })*/
 
 
-/*document.querySelector("#enviar").onsubmit = () =>{
-  const name_usuario = localStorage.getItem("name");
-  const nombre_canal = localStorage.getItem("currentchannel");
-  const mensaje =  document.querySelector("#mensaje").value;
-
-  const tiempo_instancia = new Date();
-
-  const tiempo = tiempo_instancia.toLocaleString('es-ES', {hour:'numeric', minute: 'numeric', hour12: true})
-  var fecha = tiempo_instancia.toDateString();
-  fecha = fecha.slice(4, fecha.length);
-
-  socket.emit('mensaje enviado', nombre_canal, name_usuario, mensaje, tiempo, fecha);
-}
-
 /*socket.on('mensaje recibido', recibido => {
-  const nombrecanal = recibido.nombrecanal;
+  const nombrecanal = recibido.channelname;
   const data = received.data;
   const usuario = data[0];
   const fecha = data[1];
@@ -121,16 +159,5 @@ localStorage.getItem("currentchannel")
 }
 })*/
 
-socket.on('connect', () => {
 
-        socket.on('message', function(data) { 
-          $('#lista').append('<h6 >' + name + '</h6><small>' + data + '</small>')  
-          })
-      
-          $('#enviar').on('click', function() {
-            socket.send($('#mensaje').val());
-            $('#mensaje').val('');
-          })
-
-    });
-  })
+})

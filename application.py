@@ -31,6 +31,8 @@ def home():
         session['name']=name
         session.permanent=True
 
+        
+
         #channel = request.form.get("channel")
         #if channel in channels:
          #   flash("This channel already exists. Please try again")
@@ -70,20 +72,39 @@ def add_chanel(canales):
         print(channels)
         emit('display channels',canales, broadcast=True)
 
-@socketio.on('joined')
-def joined(establecer_canal, mequedesinideas):
-    emit("unirse al canal", {"nombre_canal": establecer_canal, "messages": channels[establecer_canal]})
+#@socketio.on('joined')
+#def joined(canal_storage,name):
+    #emit('bievenida', canal_storage, name)
+    #send(name + ' has entered the room.', to=canal_storage)
+
+
+# @socketio.on("mensaje enviado")
+# def sendmessage(nombre_canal, name_usuario, mensaje, tiempo, fecha):
+# 
+    # if nombre_canal not in channels.keys():
+        # channels[nombre_canal]=[]
+    
+    # data = (name_usuario, mensaje, tiempo, fecha)
+    # channels[nombre_canal].append(data)
+
+    # emit("message", {'channelname':nombre_canal, 'data':data}, broadcast=True)
 
 @app.route("/logout")
 def logout():
     session.permanent=False
     return redirect("/")
 
+@socketio.on('add message')
+def add_message(elmensaje, canal_storage):
+    channels[canal_storage].append(elmensaje)
+    print(channels)
 
 @socketio.on('message') 
 def handle_Message(data): 
     print('Mensaje: ' + data) 
     send(data, broadcast = True)
+
+
 
 if __name__ == '__main__':
     socketio.run(app)
