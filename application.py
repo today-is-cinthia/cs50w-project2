@@ -14,6 +14,7 @@ socketio = SocketIO(app)
 nombres = []
 channels=dict()
 channels=["General"]
+mensajes = []
 
 @app.route("/")
 def index():
@@ -23,22 +24,9 @@ def index():
 def home():
     if request.method == "POST":
         name = request.form.get("name")
-        #for i in nombres:
-         #   if name == i:
-          #      flash("This user already exists. Try again")
-           #     return redirect("/")
         nombres.append(name)
         session['name']=name
         session.permanent=True
-
-        
-
-        #channel = request.form.get("channel")
-        #if channel in channels:
-         #   flash("This channel already exists. Please try again")
-          #  return redirect("/home")
-       # channels.append(channel)
-        #print(channels)
     else:
         if request.method == "GET":
             name= session['name']
@@ -95,9 +83,16 @@ def logout():
     return redirect("/")
 
 @socketio.on('add message')
-def add_message(elmensaje, canal_storage):
-    channels[canal_storage].append(elmensaje)
-    print(channels)
+def add_message(elmensaje, canalstorage):
+    a = 0
+    for i in channels:
+        if i != canalstorage:
+            a+=1
+        else:
+            if len(mensajes) > 99:
+                del mensajes[0]
+            mensajes.append(elmensaje)
+            print(mensajes)
 
 @socketio.on('message') 
 def handle_Message(data): 
