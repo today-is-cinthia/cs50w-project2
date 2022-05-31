@@ -1,33 +1,36 @@
-body
-{
-    background-color: 	#696969;
-    
+body {
+    background-color: #696969;
 }
-*::-webkit-scrollbar{
+
+*::-webkit-scrollbar {
     width: 10px;
 }
 
-#pantallamensajes{
+#pantallamensajes {
     height: 67vh;
     overflow-y: auto;
     border-radius: 10px 20px 15px 10px;
-}       
-#fondo,#enviar, #mensaje, #lista{
+}
+
+#fondo,
+#enviar,
+#mensaje,
+#lista {
     border-radius: 10px 20px 15px 10px;
 }
 
-#menu{
+#menu {
     height: 100px;
     overflow-y: auto;
 }
 
-#lista{
+#lista,
+#listarecibido {
     display: block;
-    background-color:white;
+    background-color: white;
     color: black;
     width: 400px;
     display: block;
     text-align: right;
     float: right;
 }
-

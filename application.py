@@ -14,7 +14,7 @@ socketio = SocketIO(app)
 nombres = []
 channels=dict()
 channels=["General"]
-mensajes = []
+mensajes = [[]]
 
 @app.route("/")
 def index():
@@ -53,12 +53,14 @@ def home():
     
 @socketio.on("add channel")
 def add_chanel(canales):
+    print(mensajes)
     if canales in channels:
         flash("Este canal ya existe. Por favor intente nuevamente")
     else:
         channels.append(canales)
         print(channels)
-        emit('display channels',canales, broadcast=True)
+        mensajes.append([])
+        emit('display channels',canales,broadcast=True)
 
 #@socketio.on('joined')
 #def joined(canal_storage,name):
@@ -86,18 +88,35 @@ def logout():
 def add_message(elmensaje, canalstorage):
     a = 0
     for i in channels:
-        if i != canalstorage:
-            a+=1
+        if i == canalstorage:
+            break
         else:
-            if len(mensajes) > 99:
-                del mensajes[0]
-            mensajes.append(elmensaje)
-            print(mensajes)
+            a+=1
+    print(mensajes)
+    print(a)
+    if len(mensajes) > 99:
+        del mensajes[0]
+    mensajes[a].append(elmensaje)
+    print(mensajes)
+    #emit('display messages', {"canal": canalstorage, "mensajes": mensajes, "channels": channels})
 
 @socketio.on('message') 
-def handle_Message(data): 
+def handle_Message(data, name): 
+    a = 0
+    for i in channels:
+        if i == canalstorage:
+            break
+        else:
+            a+=1
+    print(mensajes)
+    print(a)
+    if len(mensajes) > 99:
+        del mensajes[0]
+    mensajes[a].append(elmensaje)
+    print(mensajes)
     print('Mensaje: ' + data) 
-    send(data, broadcast = True)
+    print(name)
+    send({"data":data, "name":name},broadcast = True)
 
 
 
