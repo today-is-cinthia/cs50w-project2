@@ -12,9 +12,8 @@ app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 socketio = SocketIO(app)
 
 nombres = []
-channels=dict()
-channels=["General"]
-mensajes = [[]]
+channels=[]
+mensajes = []
 
 @app.route("/")
 def index():
@@ -50,6 +49,19 @@ def home():
     #else:
      #   mensajes.append(mensaje)
     #return render_template("home.html", nombre=name, canal=channels, mensajes = mensajes)
+@socketio.on('display messages')
+def displaymessages(botoncanal):
+    print("---------")
+    print(botoncanal)
+    print("---------")
+    a = 0
+    for i in channels:
+        if i == botoncanal:
+            break
+        else:
+            a+=1
+    messages = mensajes[a]
+    emit('display html messages', messages)
     
 @socketio.on("add channel")
 def add_chanel(canales):
@@ -84,35 +96,36 @@ def logout():
     session.permanent=False
     return redirect("/")
 
-@socketio.on('add message')
-def add_message(elmensaje, canalstorage):
-    a = 0
-    for i in channels:
-        if i == canalstorage:
-            break
-        else:
-            a+=1
-    print(mensajes)
-    print(a)
-    if len(mensajes) > 99:
-        del mensajes[0]
-    mensajes[a].append(elmensaje)
-    print(mensajes)
+#@socketio.on('add message')
+#def add_message(elmensaje, canalstorage):
+ #   a = 0
+  #  for i in channels:
+   #     if i == canalstorage:
+    #        break
+     #   else:
+      #      a+=1
+    #print(mensajes)
+    #print(a)
+    #if len(mensajes) > 99:
+     #   del mensajes[0]
+    #mensajes[a].append(elmensaje)
+    #print(mensajes)
     #emit('display messages', {"canal": canalstorage, "mensajes": mensajes, "channels": channels})
 
 @socketio.on('message') 
-def handle_Message(data, name): 
+def handle_Message(data, name,canal_storage): 
     a = 0
     for i in channels:
-        if i == canalstorage:
+        if i == canal_storage:
             break
         else:
             a+=1
     print(mensajes)
     print(a)
+    print(data)
     if len(mensajes) > 99:
         del mensajes[0]
-    mensajes[a].append(elmensaje)
+    mensajes[a].append(data)
     print(mensajes)
     print('Mensaje: ' + data) 
     print(name)

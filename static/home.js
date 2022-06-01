@@ -29,14 +29,22 @@ document.addEventListener('DOMContentLoaded', () => {
     for (var i = 0; i < listadebotones.length; i++) {
         listadebotones[i].addEventListener('click', function() {
             botoncanal = this.value
+            console.log(botoncanal)
             localStorage.setItem("currentchannel", botoncanal)
             alert("¡  You have joined to " + localStorage.getItem("currentchannel") + "  !  🥰")
             document.querySelector("#enviar").disabled = false;
             let nomcanal = document.querySelector("#canal")
             nomcanal.innerHTML = localStorage.getItem("currentchannel")
+            socket.emit('display messages', localStorage.getItem("currentchannel"))
         })
     }
 
+    socket.on('display html messages', function(messages){
+        for(var i=0; i < messages.length; i++){
+            recibirmensajes = document.querySelector("#listarecibido")
+            recibirmensajes.innerHTML += messages[i]
+        }
+    })
 
     socket.on('connect', () => {
         document.querySelector("#enviar").onclick = () => {
@@ -66,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
 
         $('#enviar').on('click', function() {
-            socket.send($('#mensaje').val(), name);
+            socket.send($('#mensaje').val(), name,canal_storage);
             $('#mensaje').val('');
         })
 
