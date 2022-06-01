@@ -61,6 +61,7 @@ def displaymessages(botoncanal):
         else:
             a+=1
     messages = mensajes[a]
+    print(messages)
     emit('display html messages', messages)
     
 @socketio.on("add channel")
@@ -113,7 +114,7 @@ def logout():
     #emit('display messages', {"canal": canalstorage, "mensajes": mensajes, "channels": channels})
 
 @socketio.on('message') 
-def handle_Message(data, name,canal_storage): 
+def handle_Message(data, name,time,canal_storage): 
     a = 0
     for i in channels:
         if i == canal_storage:
@@ -125,7 +126,8 @@ def handle_Message(data, name,canal_storage):
     print(data)
     if len(mensajes) > 99:
         del mensajes[0]
-    mensajes[a].append(data)
+    datos = (name, data, time)
+    mensajes[a].append(datos)
     print(mensajes)
     print('Mensaje: ' + data) 
     print(name)

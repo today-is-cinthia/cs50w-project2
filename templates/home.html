@@ -4,7 +4,7 @@ CFLACK
 {% endblock %}
 {% block main %}
 <script src="/static/home.js"></script>
-
+<script src="https://kit.fontawesome.com/60f66db414.js" crossorigin="anonymous"></script>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
     <a style="font-family: 'Rubik Bubbles', cursive;color: antiquewhite;" class="navbar-brand" href="#">CFLACK</a>
     <ul class="navbar-nav">
@@ -26,6 +26,12 @@ CFLACK
     </div>
   </header>
 {% endif %}
+
+<button class="switch" id="switch">
+  <span><i class="fa-solid fa-sun"></i></span>
+  <span><i class="fa-solid fa-cloud-moon"></i></span>
+</button>
+
   <div id="fondo" style="height: 480px; width:120%" class="container p-3 my-3 bg-dark text-white">
     <div id="pantallamensajes" style="margin-left: 2%;float: left; width: 30%;height: 90%;" class="container p-3 my-3 bg-light text-dark">
     <br><h4>Create your own chanel:</h4><br>

@@ -35,14 +35,26 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector("#enviar").disabled = false;
             let nomcanal = document.querySelector("#canal")
             nomcanal.innerHTML = localStorage.getItem("currentchannel")
+            mensaje = document.querySelector("#lista")
+            mensaje.innerHTML = ""
             socket.emit('display messages', localStorage.getItem("currentchannel"))
         })
     }
-
+1
     socket.on('display html messages', function(messages){
+        recibirmensajes = document.querySelector("#listarecibido")
+        mismensajes = document.querySelector("#lista")
+        recibirmensajes.innerHTML = "";
         for(var i=0; i < messages.length; i++){
-            recibirmensajes = document.querySelector("#listarecibido")
-            recibirmensajes.innerHTML += messages[i]
+            let nameguardado = messages[i][0]
+            let mensajeguardado = messages[i][1]
+            let timeguardado = messages[i][2]
+            if (nameguardado == localStorage.getItem("name")){
+                mismensajes.innerHTML += '<br><h6 >' + nameguardado + '</h6><small>' + mensajeguardado + '</small><br><small>' + timeguardado + '</small>'
+            }
+            else{
+            recibirmensajes.innerHTML += '<br><h6 >' + nameguardado + '</h6><small>' + mensajeguardado + '</small><br><small>' + timeguardado + '</small>'
+            }
         }
     })
 
@@ -50,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector("#enviar").onclick = () => {
             elmensaje = document.querySelector("#mensaje").value
             var canalstorage = localStorage.getItem("currentchannel")
-            socket.emit('add message', elmensaje, canalstorage)
+         //   socket.emit('add message', elmensaje, canalstorage)
         }
     })
 
@@ -74,7 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
         })
 
         $('#enviar').on('click', function() {
-            socket.send($('#mensaje').val(), name,canal_storage);
+            const time = new Date().toLocaleString()
+            socket.send($('#mensaje').val(), name,time,localStorage.getItem("currentchannel"));
             $('#mensaje').val('');
         })
 
