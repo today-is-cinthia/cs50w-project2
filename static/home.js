@@ -93,6 +93,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
+    const btnswitch = document.querySelector("#switch")
+
+    btnswitch.addEventListener('click',() =>{
+        document.body.classList.toggle('dark')
+        btnswitch.body.classList.toggle('active')
+    })
+
     //   socket.on('display messages', function(diccionario){
     //   document.querySelector("#")
     //})

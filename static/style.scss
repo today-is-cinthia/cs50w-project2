@@ -1,0 +1,100 @@
+body {
+    background-color: #696969;
+    transition: .3s ease all;
+    &.dark{
+        background-color: 	#f1f1f1;
+    }
+}
+nav{
+    background-color: #000;
+    body.dark &{
+        background-color: 	#4682B4;
+        box-shadow: #696969;
+    }
+}
+
+*::-webkit-scrollbar {
+    width: 10px;
+}
+#fondo{
+    background-color: 
+    #2D3033;
+
+    body.dark &{
+        background-color: steelblue;
+    }
+}
+
+#pantallamensajes {
+    background-color: aquamarine;
+    height: 67vh;
+    overflow-y: auto;
+    border-radius: 10px 20px 15px 10px;
+    body.dark &{
+        background-color: #2D3033;
+    }
+}
+
+#fondo,
+#enviar,
+#mensaje,
+#lista , #listarecibido{
+    border-radius: 10px 20px 15px 10px;
+}
+
+#menu {
+    height: 100px;
+    overflow-y: auto;
+}
+
+#lista,
+#listarecibido {
+    display: block;
+    background-color: white;
+    color: black;
+    width: 400px;
+    display: block;
+    text-align: right;
+    float: right;
+}
+.switch{
+    background: #343D5B;
+    border-radius: 1000px;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    outline: none;
+    &::after{
+        content: "";
+        display: block;
+        height: 30px;
+        width: 30px;
+        position: absolute;
+        background: #f1f1f1;
+        top: 0;
+        left: unset;
+        right: 0;
+        border-radius: 100px;
+        transition: .3s ease all;
+        box-shadow: 0px 0px 2px 2px rgba(0,0,0,.2);
+
+    }
+    &.active{
+        background-color: orange;
+        color: #000;
+        &::after{
+            right: unset;
+            left: 0;
+             
+        }
+    }
+    span{
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        display: block;
+        background: none;
+        color: #fff;
+    }
+}
