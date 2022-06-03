@@ -9,7 +9,7 @@ body.dark {
 }
 
 nav {
-  background-color: #000;
+  background-color: #2D3033;
 }
 
 body.dark nav {
@@ -44,7 +44,7 @@ body.dark #pantallamensajes {
 #fondo,
 #enviar,
 #mensaje,
-#lista, #listarecibido {
+#lista, #listarecibido, #mismensajes, #mensajesajenos {
   border-radius: 10px 20px 15px 10px;
 }
 
@@ -54,7 +54,7 @@ body.dark #pantallamensajes {
 }
 
 #lista,
-#listarecibido {
+#listarecibido, #mismensajes, #mensajesajenos {
   display: block;
   background-color: white;
   color: black;
@@ -62,6 +62,9 @@ body.dark #pantallamensajes {
   display: block;
   text-align: right;
   float: right;
+  position: relative;
+  bottom: 0;
+  margin: 2%;
 }
 
 .switch {
@@ -99,8 +102,8 @@ body.dark #pantallamensajes {
 }
 
 .switch.active::after {
-  right: unset;
   left: 0;
+  right: unset;
 }
 
 .switch span {

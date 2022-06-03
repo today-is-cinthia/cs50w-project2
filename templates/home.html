@@ -3,13 +3,12 @@
 CFLACK
 {% endblock %}
 {% block main %}
-<script src="/static/home.js"></script>
 <script src="https://kit.fontawesome.com/60f66db414.js" crossorigin="anonymous"></script>
 <nav id="barra" class="navbar navbar-expand-sm navbar-dark fixed-top">
-    <a style="font-family: 'Rubik Bubbles', cursive;color: antiquewhite;" class="navbar-brand" href="#">CFLACK</a>
+    <a style="font-family: 'Rubik Glitch', cursive;color: antiquewhite;" class="navbar-brand" href="#">CFLACK</a>
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="">¡Welcome to CFLACK!</a>
+        <a id="bienvenidanombre" class="nav-link" href=""></a>
       </li>
       <li class="nav-item">
         <a id="salir" class="nav-link" href="/logout">Log out</a>
@@ -59,6 +58,10 @@ CFLACK
     </div>
     <div style="float: left;" id="listarecibido">
     </div>
+    <div id="mismensajes">
+    </div>
+    <div style="float: left;" id="mensajesajenos">
+    </div>
   </div>
 
 
@@ -67,6 +70,7 @@ CFLACK
 <button id="enviar" style="float: right; margin-right:2%;margin-top: -2.8%; height: 7%; width: 8%;" type="submit" class="btn btn-success">send</button>
 </div> 
 </div>
+<script src="/static/home.js"></script>
 
 
 <!-- <div style="width: 100%; height: 70px;" class="container-fluid p-3 my-3 border bg-light">

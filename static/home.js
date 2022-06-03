@@ -1,13 +1,42 @@
 document.addEventListener('DOMContentLoaded', () => {
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+    const btnswitch = document.querySelector("#switch")
+    console.log(btnswitch)
+
+    if(localStorage.getItem('name') != 'undefined'){
+        $("#bienvenidanombre").append('¡Welcome to CFLACK   ' + localStorage.getItem('name') + '!')
+    }
+
+    btnswitch.addEventListener('click',() =>{
+        console.log(btnswitch)
+        document.body.classList.toggle('dark');
+        btnswitch.classList.toggle('active')
+
+        if(document.body.classList.contains('dark')){
+            localStorage.setItem('modo_oscuro', 'true')
+        }else {
+            localStorage.setItem('modo_oscuro', 'false')
+        }
+    })
+
+    //obtener modo actual
+    if(localStorage.getItem('modo_oscuro') == 'true'){
+        document.body.classList.add('dark');
+        btnswitch.classList.add('active')
+    }else{
+        document.body.classList.remove('dark');
+        btnswitch.classList.remove('active')
+    }
+
 
     var name = localStorage.getItem("name")
     var canal_storage = localStorage.getItem("currentchannel")
 
     //borrar del almacenamiento nombre al salir
     document.querySelector("#salir").onclick = () => {
-        localStorage.getItem("name")
         localStorage.removeItem("name")
+        localStorage.removeItem("currentchannel")
+        localStorage.removeItem("modo_oscuro")
     }
     document.querySelector("#createchanel").onclick = () => {
         var canales = document.querySelector("#channel").value
@@ -40,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
             socket.emit('display messages', localStorage.getItem("currentchannel"))
         })
     }
-1
     socket.on('display html messages', function(messages){
         recibirmensajes = document.querySelector("#listarecibido")
         mismensajes = document.querySelector("#lista")
@@ -77,12 +105,11 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(datos["name"])
 
             if (datos["name"] == name) {
-                $('#lista').append('<h6 >' + datos["name"] + '</h6><small>' + datos["data"] + '</small><br><small>' + time + '</small>')
+                $('#mismensajes').append('<h6 >' + datos["name"] + '</h6><small>' + datos["data"] + '</small><br><small>' + time + '</small><' )
+            
             } else {
-                $('#listarecibido').append('<br><h6 >' + datos["name"] + '</h6><small>' + datos["data"] + '</small><br><small>' + time + '</small>')
+                $('#mensajesajenos').append('<br><h6 >' + datos["name"] + '</h6><small>' + datos["data"] + '</small><br><small>' + time + '</small>')
             }
-
-
         })
 
         $('#enviar').on('click', function() {
@@ -92,13 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
         })
 
     });
-
-    const btnswitch = document.querySelector("#switch")
-
-    btnswitch.addEventListener('click',() =>{
-        document.body.classList.toggle('dark')
-        btnswitch.body.classList.toggle('active')
-    })
 
     //   socket.on('display messages', function(diccionario){
     //   document.querySelector("#")

@@ -6,7 +6,7 @@ body {
     }
 }
 nav{
-    background-color: #000;
+    background-color: #2D3033;
     body.dark &{
         background-color: 	#4682B4;
         box-shadow: #696969;
@@ -38,7 +38,7 @@ nav{
 #fondo,
 #enviar,
 #mensaje,
-#lista , #listarecibido{
+#lista , #listarecibido, #mismensajes, #mensajesajenos{
     border-radius: 10px 20px 15px 10px;
 }
 
@@ -48,7 +48,7 @@ nav{
 }
 
 #lista,
-#listarecibido {
+#listarecibido, #mismensajes, #mensajesajenos{
     display: block;
     background-color: white;
     color: black;
@@ -56,6 +56,8 @@ nav{
     display: block;
     text-align: right;
     float: right;
+    position: relative;bottom: 0;
+    margin: 2%;
 }
 .switch{
     background: #343D5B;
@@ -84,8 +86,8 @@ nav{
         background-color: orange;
         color: #000;
         &::after{
-            right: unset;
             left: 0;
+            right: unset;
              
         }
     }
