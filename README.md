@@ -1,4 +1,4 @@
-Aplicación para mandar mensajes a tiempo real usando SOCKETIO y FLASK
+# Aplicación para mandar mensajes a tiempo real usando SOCKETIO y FLASK
 
 En la primera página se es pedido un nombre se usuario el cual será asignado a los mensajes que desea enviar.
 
